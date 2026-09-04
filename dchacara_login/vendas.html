@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Vendas</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="dashboard-body" data-page="vendas">
+    <div class="app-shell">
+        
+        <!--
+            MENU LATERAL:
+            É preenchido automaticamente pelo script.js.
+            Não precisa copiar as abas manualmente para cada página.
+        -->
+        <aside class="sidebar" id="appSidebar"></aside>
+    
+
+        <main class="app-main">
+            
+            <header class="app-header">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Vendas</h1>
+                    <p>Registre uma venda e o estoque será baixado automaticamente.</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+
+            <section class="module-hero sales-hero">
+                <div>
+                    <span class="module-icon">🛒</span>
+                    <div>
+                        <span class="panel-kicker light">PONTO DE VENDA</span>
+                        <h2>Nova venda</h2>
+                        <p>Selecione os produtos, informe a quantidade e finalize o pagamento.</p>
+                    </div>
+                </div>
+
+                <div class="module-hero-stat">
+                    <small>Vendas hoje</small>
+                    <strong id="vendasHojeResumo">0</strong>
+                </div>
+            </section>
+
+            <section class="sales-layout">
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">PRODUTOS</span>
+                            <h2>Adicionar à venda</h2>
+                            <p>Busque um item disponível no estoque.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid two">
+                        <div class="form-control">
+                            <label for="vendaProduto">Produto</label>
+                            <select id="vendaProduto"></select>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="vendaQtd">Quantidade</label>
+                            <input id="vendaQtd" type="number" min="1" step="1" value="1">
+                        </div>
+                    </div>
+
+                    <div id="produtoVendaInfo" class="product-mini-info"></div>
+
+                    <button id="btnAdicionarCarrinho" class="primary-button" type="button">
+                        + Adicionar produto
+                    </button>
+
+                    <div class="divider"></div>
+
+                    <div class="panel-heading small">
+                        <div>
+                            <span class="panel-kicker">CARRINHO</span>
+                            <h2>Itens da venda</h2>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Qtd.</th>
+                                    <th>Unitário</th>
+                                    <th class="right">Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="carrinhoBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="carrinhoEmpty" class="empty-state compact">
+                        <span>🧺</span>
+                        <strong>Carrinho vazio</strong>
+                        <p>Adicione um produto para iniciar a venda.</p>
+                    </div>
+                </article>
+
+                <aside class="panel checkout-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">FINALIZAÇÃO</span>
+                            <h2>Resumo da venda</h2>
+                        </div>
+                    </div>
+
+                    <div class="checkout-total">
+                        <span>Total</span>
+                        <strong id="carrinhoTotal">R$ 0,00</strong>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="vendaPagamento">Forma de pagamento</label>
+                        <select id="vendaPagamento">
+                            <option value="Dinheiro">💵 Dinheiro</option>
+                            <option value="PIX">📱 PIX</option>
+                            <option value="Cartão">💳 Cartão</option>
+                            <option value="Fiado">🧾 Fiado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-control">
+                        <label for="vendaCliente">Cliente</label>
+                        <input id="vendaCliente" type="text" placeholder="Opcional, exceto para fiado">
+                    </div>
+
+                    <div id="fiadoExtras" class="fiado-extras hidden">
+                        <div class="form-control">
+                            <label for="vendaTelefone">Telefone</label>
+                            <input id="vendaTelefone" type="text" placeholder="(61) 99999-9999">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="vendaVencimento">Vencimento</label>
+                            <input id="vendaVencimento" type="date">
+                        </div>
+                    </div>
+
+                    <button id="btnFinalizarVenda" class="success-button wide" type="button">
+                        ✓ Finalizar venda
+                    </button>
+
+                    <p class="helper-note">
+                        Ao finalizar, as quantidades serão descontadas do estoque.
+                    </p>
+                </aside>
+            </section>
+
+            <section class="panel top-gap">
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-kicker">HISTÓRICO</span>
+                        <h2>Últimas vendas</h2>
+                        <p>Movimentações registradas recentemente.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>Pagamento</th>
+                                <th>Itens</th>
+                                <th class="right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vendasHistoricoBody"></tbody>
+                    </table>
+                </div>
+
+                <div id="vendasHistoricoEmpty" class="empty-state compact">
+                    <span>🧾</span>
+                    <strong>Nenhuma venda ainda</strong>
+                    <p>As vendas concluídas serão listadas aqui.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="./script.js"></script>
+</body>
+</html>

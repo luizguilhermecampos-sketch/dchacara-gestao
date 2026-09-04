@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Despesas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-body" data-page="despesas">
+    <div class="app-shell">
+        
+        <!--
+            MENU LATERAL:
+            É preenchido automaticamente pelo script.js.
+            Não precisa copiar as abas manualmente para cada página.
+        -->
+        <aside class="sidebar" id="appSidebar"></aside>
+    
+
+        <main class="app-main">
+            
+            <header class="app-header">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Despesas</h1>
+                    <p>Registre os gastos da loja para acompanhar o resultado mensal com mais precisão.</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+
+            <section class="kpi-grid">
+                <article class="kpi-card">
+                    <div class="kpi-icon red">💸</div>
+                    <div>
+                        <span>DESPESAS OPERACIONAIS DO MÊS</span>
+                        <strong id="despesasMesTotal">R$ 0,00</strong>
+                        <small>Total no mês atual</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">🧾</div>
+                    <div>
+                        <span>LANÇAMENTOS</span>
+                        <strong id="despesasMesQtd">0</strong>
+                        <small>Despesas registradas no mês</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">📅</div>
+                    <div>
+                        <span>MAIOR DESPESA</span>
+                        <strong id="despesaMaior">R$ 0,00</strong>
+                        <small>Maior lançamento no mês</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon green">📊</div>
+                    <div>
+                        <span>MÉDIA POR DESPESA</span>
+                        <strong id="despesaMedia">R$ 0,00</strong>
+                        <small>Média dos lançamentos</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="expense-layout">
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">HISTÓRICO</span>
+                            <h2>Despesas registradas</h2>
+                            <p>Filtre pelo mês e acompanhe os gastos da loja.</p>
+                        </div>
+
+                        <div class="month-filter">
+                            <label for="despesasMesFiltro">Mês</label>
+                            <input id="despesasMesFiltro" type="month">
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Pagamento</th>
+                                    <th class="right">Valor</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="despesasBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="despesasEmpty" class="empty-state">
+                        <span>💸</span>
+                        <strong>Nenhuma despesa neste período</strong>
+                        <p>Use o formulário ao lado para registrar um gasto.</p>
+                    </div>
+                </article>
+
+                <aside class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">NOVO GASTO</span>
+                            <h2>Registrar despesa</h2>
+                            <p>Ex.: energia, frete, aluguel, manutenção, impostos.</p>
+                        </div>
+                    </div>
+
+                    <div class="expense-guidance">
+                            <span>📦</span>
+
+                            <div>
+                                <strong>
+                                    Compra de mercadoria deve ser lançada em Entradas.
+                                </strong>
+
+                                <p>
+                                    Rações, medicamentos, utensílios e ferramentas aumentam o estoque.
+                                    O custo dessas mercadorias entra no CMV somente quando forem vendidas.
+                                </p>
+                            </div>
+                        </div>
+
+                        <form id="despesaForm">
+                        <div class="form-control">
+                            <label for="despesaData">Data</label>
+                            <input id="despesaData" type="date" required>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="despesaDescricao">Descrição</label>
+                            <input id="despesaDescricao" type="text" placeholder="Ex.: Conta de energia" required>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="despesaCategoria">Categoria</label>
+                            <select id="despesaCategoria">
+                                
+                                <option value="Frete">🚚 Frete</option>
+                                <option value="Energia">💡 Energia</option>
+                                <option value="Água">💧 Água</option>
+                                <option value="Aluguel">🏠 Aluguel</option>
+                                <option value="Manutenção">🛠️ Manutenção</option>
+                                <option value="Impostos">🧾 Impostos</option>
+                                <option value="Funcionários">👥 Funcionários</option>
+                                <option value="Outros">📌 Outros</option>
+                            </select>
+                        </div>
+
+                        <div class="form-grid two">
+                            <div class="form-control">
+                                <label for="despesaValor">Valor</label>
+                                <input id="despesaValor" type="number" min="0.01" step="0.01" placeholder="0,00" required>
+                            </div>
+
+                            <div class="form-control">
+                                <label for="despesaPagamento">Pagamento</label>
+                                <select id="despesaPagamento">
+                                    <option value="Dinheiro">Dinheiro</option>
+                                    <option value="PIX">PIX</option>
+                                    <option value="Cartão">Cartão</option>
+                                    <option value="Boleto">Boleto</option>
+                                    <option value="Transferência">Transferência</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="despesaObs">Observação</label>
+                            <textarea id="despesaObs" rows="3" placeholder="Opcional"></textarea>
+                        </div>
+
+                        <button class="primary-button wide" type="submit">
+                            💸 Registrar despesa
+                        </button>
+                    </form>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>

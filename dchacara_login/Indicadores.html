@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>D'Chácara Empório | Indicadores</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-body" data-page="indicadores">
+
+    <div class="app-shell">
+
+        <!-- Menu lateral único -->
+        <aside class="sidebar" id="appSidebar"></aside>
+
+        <main class="app-main">
+
+            <header class="app-header">
+
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+
+                    <h1>Indicadores</h1>
+
+                    <p>
+                        Analise vendas, custos, despesas, lucro e desempenho da loja por mês.
+                    </p>
+                </div>
+
+                <div class="header-actions">
+
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- FILTRO -->
+            <section class="indicator-toolbar">
+
+                <div>
+                    <span class="panel-kicker">PERÍODO</span>
+
+                    <h2>Análise mensal</h2>
+
+                    <p>
+                        Escolha o mês para atualizar automaticamente os indicadores.
+                    </p>
+                </div>
+
+                <div class="month-filter large">
+
+                    <label for="indicadoresMes">
+                        Mês analisado
+                    </label>
+
+                    <input
+                        id="indicadoresMes"
+                        type="month"
+                    >
+
+                </div>
+
+            </section>
+
+            <!-- KPIs -->
+            <section class="kpi-grid indicator-kpis">
+
+                <article class="kpi-card">
+                    <div class="kpi-icon green">💰</div>
+
+                    <div>
+                        <span>FATURAMENTO</span>
+
+                        <strong id="indFaturamento">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Total vendido no mês</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">📦</div>
+
+                    <div>
+                        <span>CMV</span>
+
+                        <strong id="indCMV">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Custo das mercadorias vendidas</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon green">📈</div>
+
+                    <div>
+                        <span>LUCRO BRUTO</span>
+
+                        <strong id="indLucroBruto">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Faturamento − CMV</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">%</div>
+
+                    <div>
+                        <span>MARGEM BRUTA</span>
+
+                        <strong id="indMargemBruta">
+                            0,0%
+                        </strong>
+
+                        <small>Lucro bruto sobre faturamento</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon red">💸</div>
+
+                    <div>
+                        <span>DESPESAS OPERACIONAIS</span>
+
+                        <strong id="indDespesas">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Sem compras de mercadoria</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon green">✅</div>
+
+                    <div>
+                        <span>LUCRO LÍQUIDO ESTIMADO</span>
+
+                        <strong id="indLucroLiquido">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Lucro bruto − despesas</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">📊</div>
+
+                    <div>
+                        <span>MARGEM LÍQUIDA</span>
+
+                        <strong id="indMargemLiquida">
+                            0,0%
+                        </strong>
+
+                        <small>Lucro estimado sobre faturamento</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">🛒</div>
+
+                    <div>
+                        <span>VENDAS</span>
+
+                        <strong id="indQtdVendas">
+                            0
+                        </strong>
+
+                        <small>Quantidade de vendas</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">📦</div>
+
+                    <div>
+                        <span>ITENS VENDIDOS</span>
+
+                        <strong id="indItensVendidos">
+                            0
+                        </strong>
+
+                        <small>Quantidade total de itens</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">🎯</div>
+
+                    <div>
+                        <span>TICKET MÉDIO</span>
+
+                        <strong id="indTicket">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Faturamento ÷ vendas</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">🏆</div>
+
+                    <div>
+                        <span>MAIS VENDIDO</span>
+
+                        <strong id="indMaisVendido">
+                            -
+                        </strong>
+
+                        <small id="indMaisVendidoQtd">
+                            Sem vendas
+                        </small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon red">🧾</div>
+
+                    <div>
+                        <span>FIADOS GERADOS</span>
+
+                        <strong id="indFiadoGerado">
+                            R$ 0,00
+                        </strong>
+
+                        <small>Vendas fiadas no mês</small>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- FORMAÇÃO DO LUCRO -->
+            <section class="panel finance-flow-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="panel-kicker">
+                            FORMAÇÃO DO RESULTADO
+                        </span>
+
+                        <h2>
+                            Como o lucro foi calculado
+                        </h2>
+
+                        <p>
+                            Compra de estoque não é descontada como despesa no momento da entrada.
+                            O custo entra no CMV quando o produto é vendido.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="finance-flow">
+
+                    <div class="finance-flow-box">
+                        <small>Faturamento</small>
+                        <strong id="flowFaturamento">R$ 0,00</strong>
+                    </div>
+
+                    <span class="finance-flow-operator">−</span>
+
+                    <div class="finance-flow-box cost">
+                        <small>CMV</small>
+                        <strong id="flowCMV">R$ 0,00</strong>
+                    </div>
+
+                    <span class="finance-flow-operator">=</span>
+
+                    <div class="finance-flow-box gross">
+                        <small>Lucro bruto</small>
+                        <strong id="flowLucroBruto">R$ 0,00</strong>
+                    </div>
+
+                    <span class="finance-flow-operator">−</span>
+
+                    <div class="finance-flow-box expense">
+                        <small>Despesas operacionais</small>
+                        <strong id="flowDespesas">R$ 0,00</strong>
+                    </div>
+
+                    <span class="finance-flow-operator">=</span>
+
+                    <div class="finance-flow-box net">
+                        <small>Lucro estimado</small>
+                        <strong id="flowLucroLiquido">R$ 0,00</strong>
+                    </div>
+
+                </div>
+
+                <div
+                    id="costDataWarning"
+                    class="finance-warning hidden"
+                ></div>
+
+            </section>
+
+            <section class="indicator-grid">
+
+                <!-- VENDAS POR DIA -->
+                <article class="panel span-wide">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                VENDAS POR DIA
+                            </span>
+
+                            <h2>
+                                Faturamento diário
+                            </h2>
+
+                            <p>
+                                Quanto foi vendido em cada dia do mês.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="salesDayChart"
+                        class="simple-bar-chart"
+                    ></div>
+
+                    <div
+                        id="salesDayEmpty"
+                        class="empty-state compact"
+                    >
+                        <span>📅</span>
+
+                        <strong>
+                            Sem vendas neste mês
+                        </strong>
+
+                        <p>
+                            Os dias com vendas aparecerão aqui.
+                        </p>
+                    </div>
+
+                </article>
+
+                <!-- FORMAS DE PAGAMENTO -->
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                FORMAS DE PAGAMENTO
+                            </span>
+
+                            <h2>
+                                Como os clientes pagaram
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="paymentBreakdown"
+                        class="metric-list"
+                    ></div>
+
+                </article>
+
+                <!-- DESPESAS -->
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                DESPESAS OPERACIONAIS
+                            </span>
+
+                            <h2>
+                                Gastos por categoria
+                            </h2>
+
+                            <p>
+                                Compras de estoque ficam em Entradas.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="expenseBreakdown"
+                        class="metric-list"
+                    ></div>
+
+                </article>
+
+                <!-- RENTABILIDADE -->
+                <article class="panel span-wide">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                PRODUTOS
+                            </span>
+
+                            <h2>
+                                Rentabilidade por produto
+                            </h2>
+
+                            <p>
+                                Quantidade, faturamento, CMV, lucro bruto e margem.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="table-wrap">
+
+                        <table class="data-table profitability-table">
+
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Produto</th>
+                                    <th>Categoria</th>
+                                    <th>Quantidade</th>
+                                    <th class="right">Faturamento</th>
+                                    <th class="right">CMV</th>
+                                    <th class="right">Lucro Bruto</th>
+                                    <th class="right">Margem</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="topProductsBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div
+                        id="topProductsEmpty"
+                        class="empty-state compact"
+                    >
+                        <span>🏆</span>
+
+                        <strong>
+                            Nenhum produto vendido
+                        </strong>
+
+                        <p>
+                            A rentabilidade será calculada automaticamente.
+                        </p>
+                    </div>
+
+                </article>
+
+                <!-- CATEGORIAS -->
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                CATEGORIAS
+                            </span>
+
+                            <h2>
+                                Vendas por categoria
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="categoryBreakdown"
+                        class="metric-list"
+                    ></div>
+
+                </article>
+
+                <!-- RESUMO -->
+                <article class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                RESUMO
+                            </span>
+
+                            <h2>
+                                Leitura rápida
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="indicatorSummary"
+                        class="indicator-summary"
+                    ></div>
+
+                </article>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

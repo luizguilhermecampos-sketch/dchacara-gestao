@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Início</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="dashboard-body" data-page="dashboard">
+    <div class="app-shell">
+        
+        <!--
+            MENU LATERAL:
+            É preenchido automaticamente pelo script.js.
+            Não precisa copiar as abas manualmente para cada página.
+        -->
+        <aside class="sidebar" id="appSidebar"></aside>
+    
+
+        <main class="app-main">
+            
+            <header class="app-header">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Visão Geral</h1>
+                    <p>Acompanhe os principais números da loja em um só lugar.</p>
+                </div>
+
+                <div class="header-actions">
+                    <a href="fiados.html" class="header-fiado-button">🧾 Abrir Fiados</a>
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+
+            <section class="kpi-grid">
+                <article class="kpi-card">
+                    <div class="kpi-icon green">💰</div>
+                    <div>
+                        <span>FATURAMENTO HOJE</span>
+                        <strong id="kpiFaturamentoHoje">R$ 0,00</strong>
+                        <small>Vendas concluídas hoje</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">🛒</div>
+                    <div>
+                        <span>VENDAS HOJE</span>
+                        <strong id="kpiVendasHoje">0</strong>
+                        <small>Quantidade de vendas</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">⚠️</div>
+                    <div>
+                        <span>ESTOQUE BAIXO</span>
+                        <strong id="kpiEstoqueBaixo">0</strong>
+                        <small>Itens no mínimo ou abaixo</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon red">🧾</div>
+                    <div>
+                        <span>FIADOS EM ABERTO</span>
+                        <strong id="kpiFiados">R$ 0,00</strong>
+                        <small>Saldo a receber</small>
+                        <a href="despesas.html" class="quick-card">
+                            <span class="quick-icon">💸</span>
+                            <div>
+                                <strong>Despesas</strong>
+                                <small>Registrar gastos da loja</small>
+                            </div>
+                        </a>
+
+                        <a href="indicadores.html" class="quick-card">
+                            <span class="quick-icon">📊</span>
+                            <div>
+                                <strong>Indicadores</strong>
+                                <small>Analisar vendas e resultados</small>
+                            </div>
+                        </a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="dashboard-grid">
+                <article class="panel span-2">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">DESEMPENHO</span>
+                            <h2>Vendas recentes</h2>
+                            <p>Últimas movimentações registradas no sistema.</p>
+                        </div>
+
+                        <a class="text-link" href="vendas.html">Ir para vendas →</a>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Cliente</th>
+                                    <th>Pagamento</th>
+                                    <th>Itens</th>
+                                    <th class="right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboardVendasBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="dashboardVendasEmpty" class="empty-state compact">
+                        <span>🛒</span>
+                        <strong>Nenhuma venda registrada</strong>
+                        <p>As vendas aparecerão aqui automaticamente.</p>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">ATENÇÃO</span>
+                            <h2>Estoque baixo</h2>
+                            <p>Produtos que precisam de reposição.</p>
+                        </div>
+                    </div>
+
+                    <div id="dashboardEstoqueBaixo" class="alert-list"></div>
+
+                    <div id="dashboardEstoqueEmpty" class="empty-state compact">
+                        <span>📦</span>
+                        <strong>Estoque sob controle</strong>
+                        <p>Nenhum item com estoque baixo.</p>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">ACESSO RÁPIDO</span>
+                            <h2>Operações da loja</h2>
+                            <p>Atalhos para as tarefas do dia a dia.</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-grid">
+                        <a href="vendas.html" class="quick-card">
+                            <span class="quick-icon">🛒</span>
+                            <div>
+                                <strong>Nova venda</strong>
+                                <small>Registrar saída de produtos</small>
+                            </div>
+                        </a>
+
+                        <a href="estoque.html" class="quick-card">
+                            <span class="quick-icon">📦</span>
+                            <div>
+                                <strong>Estoque</strong>
+                                <small>Cadastrar e consultar itens</small>
+                            </div>
+                        </a>
+
+                        <a href="entradas.html" class="quick-card">
+                            <span class="quick-icon">📥</span>
+                            <div>
+                                <strong>Entrada</strong>
+                                <small>Repor mercadorias</small>
+                            </div>
+                        </a>
+
+                        <a href="fiados.html" class="quick-card">
+                            <span class="quick-icon">🧾</span>
+                            <div>
+                                <strong>Fiados</strong>
+                                <small>Controlar valores a receber</small>
+                            </div>
+                        </a>
+                        <a href="resumo.html" class="quick-card">
+                            <span class="quick-icon">📄</span>
+                            <div>
+                                <strong>Resumo</strong>
+                                <small>Gerar relatório por período</small>
+                            </div>
+                        </a>
+
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Estoque</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="dashboard-body" data-page="estoque">
+    <div class="app-shell">
+        
+        <!--
+            MENU LATERAL:
+            É preenchido automaticamente pelo script.js.
+            Não precisa copiar as abas manualmente para cada página.
+        -->
+        <aside class="sidebar" id="appSidebar"></aside>
+    
+
+        <main class="app-main">
+            
+            <header class="app-header">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Estoque</h1>
+                    <p>Cadastre os produtos e consulte o saldo atual. Reposições devem ser lançadas na aba Entradas.</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+
+            <section class="stock-flow-note">
+                <span class="stock-flow-icon">🔄</span>
+                <div>
+                    <strong>Como o estoque funciona</strong>
+                    <p>
+                        Saldo atual = saldo inicial + entradas − vendas.
+                        Depois do cadastro, use <b>Entradas</b> para reposições e <b>Vendas</b> para saídas.
+                    </p>
+                </div>
+            </section>
+
+            <section class="category-grid">
+                <button class="category-card active" data-category="Todos" type="button">
+                    <span class="category-icon all">📦</span>
+                    <div>
+                        <strong>Todos</strong>
+                        <small id="catTodosQtd">0 produtos</small>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="Rações" type="button">
+                    <span class="category-icon ration">🐄</span>
+                    <div>
+                        <strong>Rações</strong>
+                        <small id="catRacoesQtd">0 produtos</small>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="Medicamentos" type="button">
+                    <span class="category-icon medicine">💊</span>
+                    <div>
+                        <strong>Medicamentos</strong>
+                        <small id="catMedicamentosQtd">0 produtos</small>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="Utensílios" type="button">
+                    <span class="category-icon utensil">🪣</span>
+                    <div>
+                        <strong>Utensílios</strong>
+                        <small id="catUtensiliosQtd">0 produtos</small>
+                    </div>
+                </button>
+
+                <button class="category-card" data-category="Ferramentas" type="button">
+                    <span class="category-icon tool">🛠️</span>
+                    <div>
+                        <strong>Ferramentas</strong>
+                        <small id="catFerramentasQtd">0 produtos</small>
+                    </div>
+                </button>
+            </section>
+
+            <section class="kpi-grid stock-kpis">
+                <article class="kpi-card">
+                    <div class="kpi-icon green">📦</div>
+                    <div>
+                        <span>PRODUTOS CADASTRADOS</span>
+                        <strong id="estoqueTotalProdutos">0</strong>
+                        <small>Itens diferentes</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">⚠️</div>
+                    <div>
+                        <span>ESTOQUE BAIXO</span>
+                        <strong id="estoqueBaixoQtd">0</strong>
+                        <small>No mínimo ou abaixo</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon red">⛔</div>
+                    <div>
+                        <span>SEM ESTOQUE</span>
+                        <strong id="estoqueZeradoQtd">0</strong>
+                        <small>Produtos zerados</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">💰</div>
+                    <div>
+                        <span>VALOR EM ESTOQUE</span>
+                        <strong id="estoqueValorTotal">R$ 0,00</strong>
+                        <small>Baseado no custo</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="stock-layout">
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">CATÁLOGO</span>
+                            <h2>Produtos cadastrados</h2>
+                            <p>Consulte, filtre e acompanhe o estoque atual.</p>
+                        </div>
+
+                        <div class="search-box">
+                            <span>🔎</span>
+                            <input id="estoqueBusca" type="text" placeholder="Buscar produto...">
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Categoria</th>
+                                    <th>Estoque</th>
+                                    <th>Mínimo</th>
+                                    <th>Preço</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="estoqueBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="estoqueEmpty" class="empty-state">
+                        <span>📦</span>
+                        <strong>Nenhum produto cadastrado</strong>
+                        <p>Use o formulário ao lado para cadastrar o primeiro item.</p>
+                    </div>
+                </article>
+
+                <aside class="panel product-form-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">CADASTRO</span>
+                            <h2 id="produtoFormTitulo">Novo produto</h2>
+                            <p>Cadastre as informações principais do item.</p>
+                        </div>
+                    </div>
+
+                    <form id="produtoForm">
+                        <input id="produtoId" type="hidden">
+
+                        <div class="form-control">
+                            <label for="produtoNome">Nome do produto</label>
+                            <input id="produtoNome" type="text" placeholder="Ex.: Ração bovina 25 kg" required>
+                        </div>
+
+                        <div class="form-grid two">
+                            <div class="form-control">
+                                <label for="produtoCategoria">Categoria</label>
+                                <select id="produtoCategoria" required>
+                                    <option value="Rações">🐄 Rações</option>
+                                    <option value="Medicamentos">💊 Medicamentos</option>
+                                    <option value="Utensílios">🪣 Utensílios</option>
+                                    <option value="Ferramentas">🛠️ Ferramentas</option>
+                                </select>
+                            </div>
+
+                            <div class="form-control">
+                                <label for="produtoUnidade">Unidade</label>
+                                <select id="produtoUnidade">
+                                    <option value="un.">Unidade</option>
+                                    <option value="saco">Saco</option>
+                                    <option value="kg">Kg</option>
+                                    <option value="cx.">Caixa</option>
+                                    <option value="frasco">Frasco</option>
+                                    <option value="pct.">Pacote</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="produtoCodigo">Código / SKU</label>
+                            <input id="produtoCodigo" type="text" placeholder="Opcional">
+                        </div>
+
+                        <div class="form-grid two">
+                            <div class="form-control">
+                                <label for="produtoEstoque">Saldo inicial</label>
+                                <input id="produtoEstoque" type="number" min="0" step="0.01" value="0" required>
+                                <small id="produtoEstoqueHelp" class="field-help">
+                                    Usado somente no primeiro cadastro. Depois, altere o saldo por Entradas ou Vendas.
+                                </small>
+                            </div>
+
+                            <div class="form-control">
+                                <label for="produtoMinimo">Estoque mínimo</label>
+                                <input id="produtoMinimo" type="number" min="0" step="0.01" value="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid two">
+                            <div class="form-control">
+                                <label for="produtoCusto">Custo unitário</label>
+                                <input id="produtoCusto" type="number" min="0" step="0.01" value="0">
+                            </div>
+
+                            <div class="form-control">
+                                <label for="produtoPreco">Preço de venda</label>
+                                <input id="produtoPreco" type="number" min="0" step="0.01" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="button-row">
+                            <button id="btnCancelarEdicao" class="secondary-button hidden" type="button">
+                                Cancelar
+                            </button>
+
+                            <button class="primary-button flex-1" type="submit">
+                                💾 Salvar produto
+                            </button>
+                        </div>
+                    </form>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="./script.js"></script>
+</body>
+</html>

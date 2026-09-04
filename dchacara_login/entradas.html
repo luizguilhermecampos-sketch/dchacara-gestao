@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Entradas</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="dashboard-body" data-page="entradas">
+    <div class="app-shell">
+        
+        <!--
+            MENU LATERAL:
+            É preenchido automaticamente pelo script.js.
+            Não precisa copiar as abas manualmente para cada página.
+        -->
+        <aside class="sidebar" id="appSidebar"></aside>
+    
+
+        <main class="app-main">
+            
+            <header class="app-header">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Entradas</h1>
+                    <p>Use esta aba quando chegar mercadoria nova. Cada entrada aumenta o saldo do estoque e fica registrada no histórico.</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+
+            <section class="module-hero entry-hero">
+                <div>
+                    <span class="module-icon">📥</span>
+                    <div>
+                        <span class="panel-kicker light">REPOSIÇÃO</span>
+                        <h2>Reposição / entrada de mercadoria</h2>
+                        <p>Informe o produto e a quantidade recebida. O saldo será atualizado imediatamente.</p>
+                    </div>
+                </div>
+
+                <div class="module-hero-stat">
+                    <small>Entradas este mês</small>
+                    <strong id="entradasMesResumo">0</strong>
+                </div>
+            </section>
+
+            <section class="entry-layout">
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">LANÇAMENTO</span>
+                            <h2>Registrar entrada</h2>
+                            <p>Use esta área sempre que chegar mercadoria nova.</p>
+                        </div>
+                    </div>
+
+                    <form id="entradaForm">
+                        <div class="form-control">
+                            <label for="entradaProduto">Produto</label>
+                            <select id="entradaProduto" required></select>
+                        </div>
+
+                        <div id="entradaProdutoInfo" class="product-mini-info"></div>
+
+                        <div class="form-grid two">
+                            <div class="form-control">
+                                <label for="entradaQtd">Quantidade recebida</label>
+                                <input id="entradaQtd" type="number" min="0.01" step="0.01" placeholder="0" required>
+                            </div>
+
+                            <div class="form-control">
+                                <label for="entradaCusto">Custo unitário</label>
+                                <input id="entradaCusto" type="number" min="0" step="0.01" placeholder="0,00">
+                            </div>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="entradaFornecedor">Fornecedor</label>
+                            <input id="entradaFornecedor" type="text" placeholder="Nome do fornecedor">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="entradaObs">Observação</label>
+                            <textarea id="entradaObs" rows="3" placeholder="Nota fiscal, lote, observações..."></textarea>
+                        </div>
+
+                        <button class="primary-button wide" type="submit">
+                            📥 Confirmar entrada
+                        </button>
+                    </form>
+                </article>
+
+                <aside class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">ORIENTAÇÃO</span>
+                            <h2>Como funciona</h2>
+                        </div>
+                    </div>
+
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <span>1</span>
+                            <div>
+                                <strong>Selecione o produto</strong>
+                                <p>Escolha um item já cadastrado no estoque.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <span>2</span>
+                            <div>
+                                <strong>Informe a quantidade</strong>
+                                <p>Digite quanto chegou na nova reposição.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <span>3</span>
+                            <div>
+                                <strong>Atualização automática</strong>
+                                <p>O novo saldo fica disponível nas vendas e no estoque.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="soft-note">
+                        💡 Se informar um novo custo unitário, o sistema passa a considerar esse valor no cadastro do produto.
+                    </div>
+                </aside>
+            </section>
+
+            <section class="panel top-gap">
+                <div class="panel-heading">
+                    <div>
+                        <span class="panel-kicker">HISTÓRICO</span>
+                        <h2>Últimas entradas</h2>
+                        <p>Requisições e reposições registradas recentemente.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Fornecedor</th>
+                                <th class="right">Custo unitário</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entradasBody"></tbody>
+                    </table>
+                </div>
+
+                <div id="entradasEmpty" class="empty-state compact">
+                    <span>📥</span>
+                    <strong>Nenhuma entrada registrada</strong>
+                    <p>As reposições aparecerão aqui.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="./script.js"></script>
+</body>
+</html>

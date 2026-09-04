@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Fiados</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background:#f4f7f4; color:#183425; }
+        .fallback-warning { display:none; }
+    </style>
+
+</head>
+
+<body class="dashboard-body" data-page="fiados">
+    <div class="app-shell">
+        
+        <!--
+            MENU LATERAL:
+            É preenchido automaticamente pelo script.js.
+            Não precisa copiar as abas manualmente para cada página.
+        -->
+        <aside class="sidebar" id="appSidebar"></aside>
+    
+
+        <main class="app-main">
+            
+            <header class="app-header">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Fiados</h1>
+                    <p>Controle quem deve, valores em aberto, vencimentos e recebimentos.</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+
+            <section class="kpi-grid">
+                <article class="kpi-card">
+                    <div class="kpi-icon red">🧾</div>
+                    <div>
+                        <span>TOTAL EM ABERTO</span>
+                        <strong id="fiadosTotalAberto">R$ 0,00</strong>
+                        <small>Saldo a receber</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon orange">⏰</div>
+                    <div>
+                        <span>VENCIDOS</span>
+                        <strong id="fiadosVencidos">0</strong>
+                        <small>Fiados com vencimento passado</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon blue">👥</div>
+                    <div>
+                        <span>CLIENTES DEVENDO</span>
+                        <strong id="fiadosClientes">0</strong>
+                        <small>Clientes com saldo em aberto</small>
+                    </div>
+                </article>
+
+                <article class="kpi-card">
+                    <div class="kpi-icon green">✅</div>
+                    <div>
+                        <span>QUITADOS</span>
+                        <strong id="fiadosQuitados">0</strong>
+                        <small>Registros totalmente pagos</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="debt-layout">
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-kicker">CONTAS A RECEBER</span>
+                            <h2>Fiados cadastrados</h2>
+                            <p>Vendas fiadas entram automaticamente nesta lista.</p>
+                        </div>
+
+                        <div class="search-box">
+                            <span>🔎</span>
+                            <input id="fiadoBusca" type="text" placeholder="Buscar cliente...">
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Data</th>
+                                    <th>Vencimento</th>
+                                    <th>Total</th>
+                                    <th>Pago</th>
+                                    <th>Saldo</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fiadosBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="fiadosEmpty" class="empty-state">
+                        <span>🧾</span>
+                        <strong>Nenhum fiado registrado</strong>
+                        <p>Você pode criar um manualmente ou registrar uma venda como fiado.</p>
+                    </div>
+                </article>
+
+                <aside class="stack-column">
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="panel-kicker">NOVO REGISTRO</span>
+                                <h2>Lançar fiado manual</h2>
+                            </div>
+                        </div>
+
+                        <form id="fiadoManualForm">
+                            <div class="form-control">
+                                <label for="fiadoCliente">Cliente</label>
+                                <input id="fiadoCliente" type="text" placeholder="Nome do cliente" required>
+                            </div>
+
+                            <div class="form-control">
+                                <label for="fiadoTelefone">Telefone</label>
+                                <input id="fiadoTelefone" type="text" placeholder="(61) 99999-9999">
+                            </div>
+
+                            <div class="form-control">
+                                <label for="fiadoDescricao">Descrição</label>
+                                <input id="fiadoDescricao" type="text" placeholder="Ex.: Ração e medicamento">
+                            </div>
+
+                            <div class="form-grid two">
+                                <div class="form-control">
+                                    <label for="fiadoValor">Valor</label>
+                                    <input id="fiadoValor" type="number" min="0.01" step="0.01" required>
+                                </div>
+
+                                <div class="form-control">
+                                    <label for="fiadoVencimento">Vencimento</label>
+                                    <input id="fiadoVencimento" type="date">
+                                </div>
+                            </div>
+
+                            <button class="primary-button wide" type="submit">
+                                🧾 Registrar fiado
+                            </button>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="panel-kicker">RECEBIMENTO</span>
+                                <h2>Registrar pagamento</h2>
+                            </div>
+                        </div>
+
+                        <form id="fiadoPagamentoForm">
+                            <div class="form-control">
+                                <label for="pagamentoFiado">Fiado</label>
+                                <select id="pagamentoFiado"></select>
+                            </div>
+
+                            <div class="form-grid two">
+                                <div class="form-control">
+                                    <label for="pagamentoValor">Valor recebido</label>
+                                    <input id="pagamentoValor" type="number" min="0.01" step="0.01" required>
+                                </div>
+
+                                <div class="form-control">
+                                    <label for="pagamentoForma">Forma</label>
+                                    <select id="pagamentoForma">
+                                        <option value="Dinheiro">Dinheiro</option>
+                                        <option value="PIX">PIX</option>
+                                        <option value="Cartão">Cartão</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button class="success-button wide" type="submit">
+                                💰 Registrar recebimento
+                            </button>
+                        </form>
+                    </article>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>

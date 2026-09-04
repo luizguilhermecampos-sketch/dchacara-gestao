@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Chácara Empório | Login</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="login-page">
+    <main class="login-layout">
+
+        <section class="login-hero">
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <span class="hero-badge">SISTEMA DE GESTÃO</span>
+
+                <h1>Controle sua loja<br>em um só lugar.</h1>
+
+                <p>
+                    Estoque, vendas, entradas, fiados e indicadores
+                    da D'Chácara Empório.
+                </p>
+
+                <div class="hero-features">
+                    <div class="feature">
+                        <span class="feature-icon">📦</span>
+                        <div>
+                            <strong>Estoque</strong>
+                            <small>Controle automático</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span class="feature-icon">🛒</span>
+                        <div>
+                            <strong>Vendas</strong>
+                            <small>Registro simples</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span class="feature-icon">📊</span>
+                        <div>
+                            <strong>Indicadores</strong>
+                            <small>Visão da loja</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="login-panel">
+            <div class="login-card refined-login-card">
+
+                <div class="brand-top">
+                    <div class="brand-mark">D’</div>
+
+                    <div>
+                        <strong>D'Chácara Empório</strong>
+                        <span>Acesso ao sistema</span>
+                    </div>
+                </div>
+
+                <div class="welcome">
+                    <span>BEM-VINDO</span>
+                    <h2>Entre na sua conta</h2>
+                    <p>Use seu usuário e senha para acessar o painel da loja.</p>
+
+                    <div class="welcome-pills">
+                        <span class="welcome-pill">🔐 Acesso seguro</span>
+                        <span class="welcome-pill">🏪 Painel administrativo</span>
+                    </div>
+                </div>
+
+                <form id="loginForm">
+                    <div class="field">
+                        <label for="usuario">Usuário</label>
+
+                        <div class="input-wrap login-input-wrap">
+                            <span class="input-icon">👤</span>
+
+                            <input
+                                id="usuario"
+                                type="text"
+                                placeholder="Digite seu usuário"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="senha">Senha</label>
+
+                        <div class="input-wrap login-input-wrap">
+                            <span class="input-icon">🔒</span>
+
+                            <input
+                                id="senha"
+                                type="password"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                id="toggleSenha"
+                                class="show-password"
+                                type="button"
+                                aria-label="Mostrar ou ocultar senha"
+                            >👁</button>
+                        </div>
+                    </div>
+
+                    <div class="login-meta-row">
+                        <span class="login-meta-item">🟢 Uso interno</span>
+                        <span class="login-meta-item">📍 Cristalina - GO</span>
+                    </div>
+
+                    <button class="login-button" type="submit">
+                        <span>Entrar no sistema</span>
+                        <strong>→</strong>
+                    </button>
+
+                    <p id="loginMessage" class="login-message"></p>
+                </form>
+
+                <div class="restricted-box">
+                    <span>🛡️</span>
+
+                    <p>
+                        Acesso restrito aos responsáveis pela loja.
+                    </p>
+                </div>
+            </div>
+
+            <footer class="login-footer">
+                © 2026 D'Chácara Empório • Cristalina - GO
+            </footer>
+        </section>
+
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+</html>
