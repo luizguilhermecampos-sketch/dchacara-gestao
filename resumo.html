@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>D'Chácara Empório | Resumo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-body" data-page="resumo">
+
+    <div class="app-shell">
+
+        <!-- Menu preenchido automaticamente pelo script.js -->
+        <aside class="sidebar" id="appSidebar"></aside>
+
+        <main class="app-main">
+
+            <header class="app-header no-print">
+                <div>
+                    <span class="eyebrow">D'CHÁCARA EMPÓRIO</span>
+                    <h1>Resumo / Relatório</h1>
+                    <p>
+                        Gere um relatório consolidado da loja de acordo com o período escolhido.
+                    </p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="user-pill">
+                        <span class="user-avatar">LS</span>
+
+                        <div>
+                            <strong>Luiz Silva</strong>
+                            <small>Administrador</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- FILTROS -->
+            <section class="report-filter no-print">
+
+                <div class="report-filter-title">
+                    <span class="report-filter-icon">📅</span>
+
+                    <div>
+                        <span class="panel-kicker">PERÍODO DO RELATÓRIO</span>
+                        <h2>Selecione as datas</h2>
+                        <p>
+                            Todas as vendas, entradas, despesas e fiados serão consolidados
+                            dentro do intervalo informado.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="report-filter-fields">
+
+                    <div class="form-control compact-control">
+                        <label for="resumoDataInicial">Data inicial</label>
+                        <input id="resumoDataInicial" type="date">
+                    </div>
+
+                    <div class="form-control compact-control">
+                        <label for="resumoDataFinal">Data final</label>
+                        <input id="resumoDataFinal" type="date">
+                    </div>
+
+                    <button
+                        id="btnGerarResumo"
+                        class="primary-button report-action"
+                        type="button"
+                    >
+                        🔎 Gerar relatório
+                    </button>
+
+                    <button
+                        id="btnImprimirResumo"
+                        class="secondary-button report-action"
+                        type="button"
+                    >
+                        🖨️ Imprimir / Salvar PDF
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- RELATÓRIO -->
+            <section id="reportArea" class="report-sheet">
+
+                <!-- Cabeçalho de impressão -->
+                <div class="report-header">
+
+                    <div class="report-brand">
+                        <div class="report-logo">D’</div>
+
+                        <div>
+                            <strong>D'Chácara Empório</strong>
+                            <span>Relatório Gerencial da Loja</span>
+                        </div>
+                    </div>
+
+                    <div class="report-period">
+                        <small>PERÍODO ANALISADO</small>
+                        <strong id="reportPeriodo">-</strong>
+                        <span id="reportGeradoEm">-</span>
+                    </div>
+
+                </div>
+
+                <!-- RESUMO EXECUTIVO -->
+                <div class="report-section-title">
+                    <span>01</span>
+
+                    <div>
+                        <h2>Resumo Executivo</h2>
+                        <p>Principais números do período selecionado.</p>
+                    </div>
+                </div>
+
+                <section class="report-kpi-grid">
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">💰</span>
+                        <div>
+                            <small>FATURAMENTO</small>
+                            <strong id="relFaturamento">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">📦</span>
+                        <div>
+                            <small>CMV</small>
+                            <strong id="relCMV">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">📈</span>
+                        <div>
+                            <small>LUCRO BRUTO</small>
+                            <strong id="relLucroBruto">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">%</span>
+                        <div>
+                            <small>MARGEM BRUTA</small>
+                            <strong id="relMargemBruta">0,0%</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">💸</span>
+                        <div>
+                            <small>DESPESAS OPERACIONAIS</small>
+                            <strong id="relDespesas">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi report-profit-kpi">
+                        <span class="report-kpi-icon">✅</span>
+                        <div>
+                            <small>LUCRO LÍQUIDO ESTIMADO</small>
+                            <strong id="relLucroLiquido">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">📊</span>
+                        <div>
+                            <small>MARGEM LÍQUIDA</small>
+                            <strong id="relMargemLiquida">0,0%</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">🛒</span>
+                        <div>
+                            <small>VENDAS</small>
+                            <strong id="relQtdVendas">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">📦</span>
+                        <div>
+                            <small>ITENS VENDIDOS</small>
+                            <strong id="relItensVendidos">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">🎯</span>
+                        <div>
+                            <small>TICKET MÉDIO</small>
+                            <strong id="relTicketMedio">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">🧾</span>
+                        <div>
+                            <small>FIADOS GERADOS</small>
+                            <strong id="relFiadosGerados">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">💵</span>
+                        <div>
+                            <small>FIADOS RECEBIDOS</small>
+                            <strong id="relFiadosRecebidos">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                </section>
+
+                <div id="reportExecutiveText" class="executive-note">
+                    Nenhum dado processado.
+                </div>
+
+                <!-- VENDAS POR DIA -->
+                <div class="report-section-title">
+                    <span>02</span>
+
+                    <div>
+                        <h2>Vendas por Dia</h2>
+                        <p>Faturamento diário dentro do período filtrado.</p>
+                    </div>
+                </div>
+
+                <div class="report-two-columns">
+
+                    <article class="report-card report-span">
+                        <div id="reportSalesChart" class="simple-bar-chart report-chart"></div>
+
+                        <div id="reportSalesChartEmpty" class="empty-state compact">
+                            <span>📅</span>
+                            <strong>Sem vendas no período</strong>
+                            <p>Nenhuma movimentação encontrada.</p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- PRODUTOS -->
+                <div class="report-section-title">
+                    <span>03</span>
+
+                    <div>
+                        <h2>Rentabilidade dos Produtos Vendidos</h2>
+                        <p>Quantidade, faturamento, CMV, lucro bruto e margem por produto.</p>
+                    </div>
+                </div>
+
+                <article class="report-card">
+                    <div class="table-wrap">
+                        <table class="data-table report-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Produto</th>
+                                    <th>Categoria</th>
+                                    <th>Quantidade</th>
+                                    <th class="right">Faturamento</th>
+                                    <th class="right">CMV</th>
+                                    <th class="right">Lucro Bruto</th>
+                                    <th class="right">Margem</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="reportTopProductsBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="reportTopProductsEmpty" class="empty-state compact">
+                        <span>🏆</span>
+                        <strong>Nenhum produto vendido</strong>
+                        <p>Não há produtos para classificar no período.</p>
+                    </div>
+                </article>
+
+                <!-- PAGAMENTOS + DESPESAS -->
+                <div class="report-section-title">
+                    <span>04</span>
+
+                    <div>
+                        <h2>Recebimentos e Despesas Operacionais</h2>
+                        <p>Distribuição financeira do período.</p>
+                    </div>
+                </div>
+
+                <div class="report-two-columns">
+
+                    <article class="report-card">
+                        <div class="report-card-heading">
+                            <span>💳</span>
+
+                            <div>
+                                <strong>Formas de pagamento</strong>
+                                <small>Como as vendas foram recebidas</small>
+                            </div>
+                        </div>
+
+                        <div id="reportPaymentBreakdown" class="metric-list"></div>
+                    </article>
+
+                    <article class="report-card">
+                        <div class="report-card-heading">
+                            <span>💸</span>
+
+                            <div>
+                                <strong>Despesas operacionais por categoria</strong>
+                                <small>Onde a loja mais gastou</small>
+                            </div>
+                        </div>
+
+                        <div id="reportExpenseBreakdown" class="metric-list"></div>
+                    </article>
+
+                </div>
+
+                <!-- ENTRADAS -->
+                <div class="report-section-title">
+                    <span>05</span>
+
+                    <div>
+                        <h2>Entradas de Mercadoria</h2>
+                        <p>Reposições registradas no intervalo selecionado.</p>
+                    </div>
+                </div>
+
+                <section class="report-kpi-grid report-kpi-grid-small">
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">📥</span>
+                        <div>
+                            <small>LANÇAMENTOS DE ENTRADA</small>
+                            <strong id="relQtdEntradas">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">📦</span>
+                        <div>
+                            <small>QUANTIDADE RECEBIDA</small>
+                            <strong id="relQtdRecebida">0</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-kpi">
+                        <span class="report-kpi-icon">💵</span>
+                        <div>
+                            <small>VALOR DAS ENTRADAS</small>
+                            <strong id="relValorEntradas">R$ 0,00</strong>
+                        </div>
+                    </article>
+
+                </section>
+
+                <article class="report-card">
+                    <div class="table-wrap">
+                        <table class="data-table report-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Fornecedor</th>
+                                    <th class="right">Valor estimado</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="reportEntradasBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="reportEntradasEmpty" class="empty-state compact">
+                        <span>📥</span>
+                        <strong>Nenhuma entrada registrada</strong>
+                        <p>Não houve reposição no período.</p>
+                    </div>
+                </article>
+
+                <!-- FIADOS -->
+                <div class="report-section-title">
+                    <span>06</span>
+
+                    <div>
+                        <h2>Fiados</h2>
+                        <p>Vendas fiadas geradas e valores recebidos no período.</p>
+                    </div>
+                </div>
+
+                <div class="report-two-columns">
+
+                    <article class="report-card">
+                        <div class="report-card-heading">
+                            <span>🧾</span>
+
+                            <div>
+                                <strong>Fiados gerados</strong>
+                                <small>Novas dívidas criadas no período</small>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table report-table">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Data</th>
+                                        <th class="right">Valor</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="reportFiadosBody"></tbody>
+                            </table>
+                        </div>
+
+                        <div id="reportFiadosEmpty" class="empty-state compact">
+                            <span>🧾</span>
+                            <strong>Nenhum fiado gerado</strong>
+                        </div>
+                    </article>
+
+                    <article class="report-card">
+                        <div class="report-card-heading">
+                            <span>✅</span>
+
+                            <div>
+                                <strong>Recebimentos de fiados</strong>
+                                <small>Pagamentos registrados no período</small>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table report-table">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Data</th>
+                                        <th>Forma</th>
+                                        <th class="right">Valor</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="reportRecebimentosBody"></tbody>
+                            </table>
+                        </div>
+
+                        <div id="reportRecebimentosEmpty" class="empty-state compact">
+                            <span>💰</span>
+                            <strong>Nenhum recebimento</strong>
+                        </div>
+                    </article>
+
+                </div>
+
+                <footer class="report-footer">
+                    <span>D'Chácara Empório • Sistema de Gestão</span>
+                    <span>Relatório gerado automaticamente a partir dos registros do sistema.</span>
+                </footer>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
